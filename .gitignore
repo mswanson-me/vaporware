@@ -106,6 +106,7 @@ venv.bak/
 
 # custom
 config.py
+bin
 include
 lib
 lib64
