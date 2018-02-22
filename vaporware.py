@@ -38,13 +38,11 @@ class GetOwnedGames():
         self.r = requests.get(fetch_url)
         self.data = self.r.json()
 
-    def count_games(self, data):
-        self.data = data
+    def count_games(self):
         self.games_owned = self.data["response"]["game_count"]
         print("Number of games owned: " + str(self.games_owned))
 
-    def count_played(self, data):
-        self.data = data
+    def count_played(self):
         self.list = []
         for i in self.data["response"]["games"][0:-1]:
             if i["playtime_forever"] > 0:
@@ -53,15 +51,12 @@ class GetOwnedGames():
         self.played = len(self.list)
         print("Number of games played: " + str(self.played))
 
-    def percent_played(self, data):
-        self.data = data
+    def percent_played(self):
         self.percent = self.played / self.games_owned
         print("Percentage of owned games that have been played: " + str(self.percent))
 
-    def top_ten(self, data):
-        self.data = data
-        self.playtime_sorted = json.dumps(sorted(
-            self.data["response"]["games"], key=lambda i: i["playtime_forever"], reverse=True), indent=4)
+    def top_ten(self):
+        self.playtime_sorted = json.dumps(sorted(self.data["response"]["games"], key=lambda i: i["playtime_forever"], reverse=True), indent=4)
         self.top_ten = ast.literal_eval(self.playtime_sorted)[:10]
 
         for i in self.top_ten:
@@ -79,3 +74,4 @@ class GetOwnedGames():
 
             for x in self.titles:
                 print(x)
+                
