@@ -23,14 +23,14 @@ method_dict = {"GetNewsForApp": "ISteamNews/GetNewsForApp/v0002/",
 # Functions are provided to gather limited insights from the retrieved data
 
 # Example usage
-# player_one = GetOwnedGames(config.steam_user)
-# player_one.count_games(player_one.data)
-# player_one.count_played(player_one.data)
-# player_one.percent_played(player_one.data)
-# player_one.top_ten(player_one.data)
+# player_one = SteamProfile(config.steam_user)
+# player_one.count_games()
+# player_one.count_played()
+# player_one.percent_played()
+# player_one.top_ten()
 
 
-class GetOwnedGames():
+class SteamProfile():
     def __init__(self, steam_id):
         self.steam_id = steam_id
         fetch_url = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key={}&steamid={}".format(
@@ -74,4 +74,3 @@ class GetOwnedGames():
 
             for x in self.titles:
                 print(x)
-                
