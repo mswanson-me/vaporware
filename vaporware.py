@@ -2,33 +2,9 @@ import config
 import requests
 import json
 import ast
-import numpy as np
-import pandas as pd
-
-method_dict = {"GetNewsForApp": "ISteamNews/GetNewsForApp/v0002/",
-               "GetGlobalAchievementPercentagesForApp": "ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/",
-               "GetGlobalStatsForGame": "ISteamUserStats/GetGlobalStatsForGame/v0001/",
-               "GetPlayerSummaries": "ISteamUser/GetPlayerSummaries/v0002/",
-               "GetFriendList": "ISteamUser/GetFriendList/v0001/",
-               "GetPlayerAchievements": "ISteamUserStats/GetPlayerAchievements/v0001/",
-               "GetUserStatsForGame": "ISteamUserStats/GetUserStatsForGame/v0002/",
-               "GetOwnedGames": "IPlayerService/GetOwnedGames/v0001/",
-               "GetRecentlyPlayedGames": "IPlayerService/GetRecentlyPlayedGames/v0001/",
-               "IsPlayingSharedGame": "IPlayerService/IsPlayingSharedGame/v0001/",
-               "GetSchemaForGame": "ISteamUserStats/GetSchemaForGame/v2/",
-               "GetPlayerBans": "ISteamUser/GetPlayerBans/v1/"
-               }
 
 # GetOwnedGames accepts a Steam user id and queries the Steam Web API to retrieve information about the user's owned games
 # Functions are provided to gather limited insights from the retrieved data
-
-# Example usage
-# player_one = SteamProfile(config.steam_user)
-# player_one.count_games()
-# player_one.count_played()
-# player_one.percent_played()
-# player_one.top_ten()
-
 
 class SteamProfile():
     def __init__(self, steam_id):
@@ -58,6 +34,8 @@ class SteamProfile():
     def top_ten(self):
         self.playtime_sorted = json.dumps(sorted(self.data["response"]["games"], key=lambda i: i["playtime_forever"], reverse=True), indent=4)
         self.top_ten = ast.literal_eval(self.playtime_sorted)[:10]
+        print("Your top ten played games are: ")
+
 
         for i in self.top_ten:
             self.titles = []
@@ -74,3 +52,10 @@ class SteamProfile():
 
             for x in self.titles:
                 print(x)
+
+# Example usage
+#player_one = SteamProfile(config.steam_user)
+#player_one.count_games()
+#player_one.count_played()
+#player_one.percent_played()
+#player_one.top_ten()
