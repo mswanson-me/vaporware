@@ -4,7 +4,7 @@ This project is an exercise in retrieving and handling with Python. The objectiv
 
 ## Requirements
 
-This script relies on **pandas**, which in turn relies on **numpy**. Beyond that, the script will require a **Steam API key** and a **Steam user ID** as input. Since these values are sensitive, I have masked my API key and Steam ID.
+The script requires a **Steam API key** and a **Steam user ID** as input. Since these values are sensitive, I have masked my API key and Steam ID. I recommend passing these values in from a separate config file.
 
 ## Lessons Learned
 
